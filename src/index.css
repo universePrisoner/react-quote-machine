@@ -1,0 +1,90 @@
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Oswald', sans-serif;
+}
+
+.card {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	padding: 25px;
+	width: 500px;
+	min-width: 320px;
+	min-height: 120px;
+	border-radius: 12px;
+	box-shadow: 0 0 6px rgba(0, 0, 0, .4);
+}
+
+.quote {
+	justify-content: center;
+	display: flex;
+	flex-flow: column wrap;
+	word-wrap: break-word;
+}
+
+.card__quote-wrap {
+	margin-bottom: 30px;	
+}
+
+.card__quote {
+	font-size: 18px;
+	line-height: 1.2;
+	letter-spacing: 0.05em;
+	font-weight: 400;
+}
+
+.card__quote-author {
+	text-decoration: none;
+	font-size: 16px;
+	line-height: 1.5;
+	align-self: flex-end;
+}
+
+.card__controls {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.btn {
+	padding: 10px;
+	font-size: 16px;
+	line-height: 1;
+	font-weight: 500;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.social {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.social__item {
+	flex: 1;
+	display: inline-block;
+}
+
+.social__item {
+	margin-right: 10px;
+}
+
+.social__item:last-child {
+	margin: 0;
+}
+
+.social__link {
+	text-decoration: none;
+	font-size: 20px;
+}
+
