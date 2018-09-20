@@ -10,7 +10,7 @@ class Social extends React.Component {
 		let html = this.props.shareSocial.map( (social, key) => {
 			return(
 				<li className="social__item" key={ key }>
-					<a target='_blank' href={ "https://twitter.com/share?text="+ this.props.public.text + " - " + this.props.public.author.name + "&hashtags=" + social.hashtags } className="social__link">
+					<a style={ social.styles } target='_blank' href={ "https://twitter.com/share?text="+ this.props.quoteText + " - " + this.props.quoteAuthor + "&hashtags=" + social.hashtags } className="social__link">
 						<i className={"social__icon " + social.icon}></i>
 					</a>
 				</li>

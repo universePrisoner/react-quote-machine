@@ -4,90 +4,26 @@ import './index.css';
 import Quote from './quote';
 import Social from './social';
 
+const API_URL	= 'https://talaikis.com/api/quotes/random/';
+const COLOR 	= {
+	'colorBackground1'	: '#43a3a6',
+	'colorBackground2'	: '#ffffff',
+	'colorButton1'		: '#ff69b7'
+}
+
+let styles = {
+	'btn' : {
+		color: '#ffffff',
+		backgroundColor: COLOR.colorButton1,
+		outline: 'none'
+	}
+}
+
 class Card extends React.Component {
 	constructor(prop) {
 		super();
 
 		this.state = {
-			quote: [
-				{
-					text: 'Some long  textSome long  textSome long  textSome long  textSome long  textSome long  textSome long  textSome long  text',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'John Dawg'
-					}
-				},
-				{
-					text: 'Hi',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'Me'
-					}
-				},
-				{
-					text: 'Hi 2',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'M3 0'
-					}
-				},
-				{
-					text: 'hi3',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'John Dawg'
-					}
-				},
-				{
-					text: 'Hi4',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'Me'
-					}
-				},
-				{
-					text: 'Hi 5',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'M3 0'
-					}
-				},
-				{
-					text: 'Hi 6',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'M3 0'
-					}
-				},
-				{
-					text: 'hi 7',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'John Dawg'
-					}
-				},
-				{
-					text: 'Hi 8',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'Me'
-					}
-				},
-				{
-					text: 'Hi 9',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'M3 0'
-					}
-				},
-				{
-					text: 'Hi 10',
-					author: {
-						link: 'https://somewhere.com',
-						name: 'M3 0'
-					}
-				}
-			],
 			btn: {
 				title: 'New Quote'
 			},
@@ -95,50 +31,48 @@ class Card extends React.Component {
 				{
 					href: 'http://any.com',
 					icon: 'fab fa-twitter',
-					hashtags: 'quotes,freecodecamp,react_spa'
+					hashtags: 'quotes,freecodecamp,react_spa',
+					styles: {
+						color: '#1DA1F2'
+					}
 				}
 			],
-			numberOfQuote: 0
+			quote: {
+				author: '',
+				quote: ''
+			}
 		}
 
-		this.getQuote = this.getQuote.bind(this);
+		this.getNewQuote = this.getNewQuote.bind(this);
 	}
 
-	getQuote() {
-		let len = this.state.quote.length;
-		let randomQuoteNumber = Math.ceil( Math.random() *  10);
-
-		this.setState({
-			numberOfQuote: randomQuoteNumber
+	getNewQuote() {
+		fetch( API_URL )
+			.then(res => res.json() )
+			.then(res => {
+				this.setState({
+					quote: {
+						author: res.author,
+						quote: res.quote
+					}
+			});
 		});
+
+	}
+
+	componentDidMount() {
+		this.getNewQuote();
 	}
 
 	render() {
-		let shadowColor = function() {
-			let rgb = {
-				'r' : Math.floor( Math.random() * 255 ) + 1,
-				'g' : Math.floor( Math.random() * 255 ) + 1,
-				'b' : Math.floor( Math.random() * 255 ) + 1
-			}
-
-			return 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ")";
-		}
-
-		let styles = {
-			'card' : {
-				boxShadow: '0 0 6px ' + shadowColor(),
-				transition: 'all .3s ease'
-			}
-		}
-
 		let html = (
-			<div className="card" style={ styles.card}>
+			<div className="card" style={ {backgroundColor: COLOR.colorBackground2} }>
 				<div className="card__quote-wrap">
-					<Quote quote={ this.state.quote[ this.state.numberOfQuote ]  } />
+					<Quote text={ this.state.quote.quote } author={ this.state.quote.author } />
 				</div>	
 				<div className="card__controls">
-					<Social shareSocial={ this.state.social } public={ this.state.quote[ this.state.numberOfQuote ] }/>
-					<button className="btn btn--default" onClick={ this.getQuote }>{ this.state.btn.title }</button>
+					<Social shareSocial={ this.state.social } quoteText={ this.state.quote.quote } quoteAuthor={ this.state.quote.author }/>
+					<button className="btn btn--default" style={ styles.btn } onClick={ this.getNewQuote }>{ this.state.btn.title }  </button>
 				</div>
 			</div>
 		);
@@ -146,5 +80,7 @@ class Card extends React.Component {
 		return(html);
 	}
 }
+
+document.querySelector('body').style.backgroundColor = COLOR.colorBackground1;
 
 ReactDOM.render(<Card />, document.getElementById('root'));

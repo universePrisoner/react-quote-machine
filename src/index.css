@@ -2,7 +2,7 @@ html,
 body {
 	padding: 0;
 	margin: 0;
-	font-family: 'Oswald', sans-serif;
+	font-family: 'Noto Serif JP', sans-serif;
 }
 
 .card {
@@ -15,7 +15,8 @@ body {
 	min-width: 320px;
 	min-height: 120px;
 	border-radius: 12px;
-	box-shadow: 0 0 6px rgba(0, 0, 0, .4);
+    box-shadow: 0 0 6px rgba(0, 0, 0, .4);
+    transition: all 10s ease;
 }
 
 .quote {
@@ -31,7 +32,7 @@ body {
 
 .card__quote {
 	font-size: 18px;
-	line-height: 1.2;
+	line-height: 1.4;
 	letter-spacing: 0.05em;
 	font-weight: 400;
 }
